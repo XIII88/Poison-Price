@@ -3,228 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Био-Сайт</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Price of Poison Team</title>
+    <!-- Подключение Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Bad Script (универсальный шрифт с завитушками для кириллицы) -->
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <!-- Подключение шрифта Inter (или другого подходящего) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Bad Script', cursive; /* Применяем шрифт Bad Script для всего текста */
-            background-color: #f0f2f5; /* Светло-серый фон */
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Темный фон */
+            color: #e0e0e0; /* Светлый текст */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Выравнивание по верху для лучшей прокрутки на мобильных устройствах */
+            align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            /* Добавляем фоновое изображение */
-            background-image: url('https://avatars.mds.yandex.net/i?id=a7ecc3fd97dcd9bd3fd642e0577f33b613310e97-5428196-images-thumbs&n=13');
-            background-size: cover; /* Растягиваем изображение, чтобы оно покрывало весь фон */
-            background-position: center; /* Центрируем изображение */
-            background-repeat: no-repeat; /* Не повторяем изображение */
-            background-attachment: fixed; /* Фиксируем изображение при прокрутке */
+            margin: 0;
+            overflow: hidden; /* Скрыть полосы прокрутки */
         }
-        .container {
-            background-color: #ffffff; /* Белый фон карточки */
-            border-radius: 1.5rem; /* Более скругленные углы */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Мягкая тень */
-            padding: 1.5rem;
-            max-width: 600px; /* Максимальная ширина для настольных компьютеров */
+        .card-container {
+            position: relative;
+            width: 90%; /* Адаптивная ширина */
+            max-width: 400px; /* Максимальная ширина для больших экранов */
+            height: 600px; /* Фиксированная высота для карточки */
+            overflow: hidden;
+            border-radius: 1.5rem; /* Закругленные углы */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            background-color: #2a2a2a; /* Фон карточки */
+        }
+        .card-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin-top: 20px; /* Отступ сверху */
-            position: relative; /* Для правильного наложения фона */
-            z-index: 1; /* Чтобы контейнер был поверх фонового изображения */
-        }
-        .profile-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .profile-picture {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+            height: 100%;
             object-fit: cover;
-            border: 4px solid #4299e1; /* Синяя рамка */
-            margin: 0 auto 1rem;
-            display: block;
+            opacity: 0.2; /* Прозрачность изображения */
+            filter: grayscale(100%);
         }
-        .name {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-            color: #2d3748; /* gray-800 */
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Добавляем легкую тень для "красивого" эффекта */
-            /* Удалены специфичные font-family, чтобы применялся Bad Script */
+        .card-content {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
         }
-        .title {
-            font-size: 1.125rem; /* text-lg */
-            color: #4a5568; /* gray-600 */
-            /* Удалены специфичные font-family, чтобы применялся Bad Script */
+        .header {
+            display: flex;
+            justify-content: center; /* Центрируем заголовок */
+            align-items: center;
+            padding: 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 20;
+            background-color: rgba(26, 26, 26, 0.7); /* Полупрозрачный фон для заголовка */
+            backdrop-filter: blur(5px); /* Размытие фона */
+        }
+        .header-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #e0e0e0; /* Убедимся, что цвет текста заголовка виден */
+        }
+        .price-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #888;
+            text-align: center;
+            margin-top: 3rem; /* Отступ сверху для текста "price of the counter-culture" */
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
         .section-title {
-            font-size: 1.5rem; /* text-2xl */
-            font-weight: 600; /* font-semibold */
-            color: #2d3748; /* gray-800 */
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #edf2f7; /* gray-200 */
-            /* Удалены специфичные font-family, чтобы применялся Bad Script */
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f0f0f0;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
         }
-        .info-item {
+        .list-item {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            color: #c0c0c0;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .list-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #e0e0e0;
+        }
+        .footer-dots {
             display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            color: #4a5568; /* gray-600 */
+            justify-content: center;
+            padding-bottom: 1rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 20;
         }
-        .info-item .font-bold {
-            color: #2d3748; /* gray-800 */
-            margin-right: 0.5rem;
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #555;
+            border-radius: 50%;
+            margin: 0 4px;
         }
-        .info-item a {
-            color: #4299e1; /* Синяя ссылка */
-            text-decoration: none;
+        .dot.active {
+            background-color: #e0e0e0;
         }
-        .info-item a:hover {
-            text-decoration: underline;
+        .arrow-icon {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: #e0e0e0;
+            transform: rotate(45deg);
+            z-index: 15;
+            opacity: 0.7;
         }
-        /* Адаптивные настройки */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-                margin-top: 10px;
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 640px) {
+            .card-container {
+                width: 95%;
+                height: 90vh; /* Занимает большую часть высоты экрана на мобильных */
+                max-height: 700px; /* Ограничение максимальной высоты */
             }
-            .profile-picture {
-                width: 100px;
-                height: 100px;
+            .card-content {
+                padding: 1.5rem;
             }
-            .name {
-                font-size: 1.5rem; /* text-2xl на мобильных */
-            }
-            .title {
-                font-size: 1rem; /* text-base на мобильных */
+            .price-text {
+                font-size: 1.5rem;
+                margin-top: 2rem;
             }
             .section-title {
-                font-size: 1.25rem; /* text-xl на мобильных */
+                font-size: 1.1rem;
             }
-            .final-phrase {
-                font-size: 1.5rem; /* text-2xl на мобильных */
+            .list-item {
+                font-size: 0.85rem;
             }
-        }
-        .final-phrase {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 1.875rem; /* text-3xl, крупный */
-            font-weight: 900; /* Очень жирный */
-            color: #ef4444; /* Красный цвет */
-            text-transform: uppercase; /* Все заглавные буквы */
-            line-height: 1.2;
-            padding: 1rem 0;
-            border-top: 2px dashed #edf2f7; /* Пунктирная линия сверху */
-            /* Удалены специфичные font-family, чтобы применялся Bad Script */
+            .arrow-icon {
+                font-size: 2rem;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Profile Header Section -->
-        <div class="profile-header">
-            <!-- Аватарка -->
-            <img src="https://i.ytimg.com/vi/07ZlHxmBi4Q/maxresdefault.jpg" alt="Profile Picture" class="profile-picture" onerror="this.onerror=null;this.src='https://placehold.co/120x120/4299e1/ffffff?text=ZP';">
-            <h1 class="name">Zarrpet</h1>
-            <p class="title">Кодер | Энтузиаст | Создатель</p>
-        </div>
-
-        <!-- Contact Information Section -->
-        <div>
-            <h2 class="section-title">Контактная информация</h2>
-            <div class="info-item">
-                <span class="font-bold">Почта (VK):</span> Zarrpet@vk.com
-            </div>
-            <div class="info-item">
-                <span class="font-bold">TON:</span> (не указано)
-            </div>
-            <div class="info-item">
-                <span class="font-bold">VK аккаунт:</span>
-                <a href="https://vk.com/zarrpet" target="_blank" rel="noopener noreferrer">https://vk.com/zarrpet</a>
-            </div>
-            <div class="info-item">
-                <span class="font-bold">Discord:</span>
-                <a href="https://discordapp.com/users/1106022706064916590/" target="_blank" rel="noopener noreferrer">https://discordapp.com/users/1106022706064916590/</a>
-            </div>
-            <div class="info-item">
-                <span class="font-bold">Любимое ПО:</span> Poison
+    <!-- Контейнер карточки -->
+    <div class="card-container">
+        <!-- Заголовок карточки -->
+        <div class="header">
+            <div class="header-title">
+                <span>Price of Poison Team</span>
             </div>
         </div>
 
-        <!-- About Me Section -->
-        <div>
-            <h2 class="section-title">О себе</h2>
-            <div class="info-item">
-                <span class="font-bold">девушка:</span>самая лучшая,любимая❤️❤️❤️
-            </div>
-            <div class="info-item">
-                <span class="font-bold">My penis</span>19см
-            </div>
-            <div class="info-item">
-                <span class="font-bold">начинающий:</span> кодер
-            </div>
-            <div class="info-item">
-                <span class="font-bold">свободное время:</span> провожу с девушкой
-            </div>
-            <div class="info-item">
-                <span class="font-bold">хобби:</span> кодить
-            </div>
-            <div class="info-item">
-                <span class="font-bold">вредные привычки:</span> курю, пью
-            </div>
-            <div class="info-item">
-                <span class="font-bold">занимаюсь:</span> спортом
-            </div>
-            <div class="info-item">
-                <span class="font-bold">играю:</span> в игры
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые игры:</span> CS2, Minecraft, GTA5
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые напитки:</span> пиво, квас, лимонад
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимая еда:</span> пельмени, пицца, шашлык
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые животные:</span> кошки, собаки
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые фильмы:</span> боевики, комедии, ужасы
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые сериалы:</span> Сваты, Кухня, Интерны
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые книги:</span> фантастика, фэнтези, детективы
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые цвета:</span> черный, белый, синий
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые числа:</span> 7, 13, 22
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые песни:</span> рок, рэп, поп
-            </div>
-            <div class="info-item">
-                <span class="font-bold">любимые исполнители:</span> Баста, Скриптонит, Моргенштерн
-            </div>
+        <!-- Изображение на фоне (с полупрозрачностью) -->
+        <img src="https://i.pinimg.com/736x/19/78/c6/1978c68e899f320972516d3b8f6012d7.jpg" alt="Background Image" class="card-image">
+
+        <!-- Содержимое карточки -->
+        <div id="card-content-area" class="card-content">
+            <!-- Содержимое будет вставлено JavaScript -->
         </div>
 
-        <!-- Final Phrase Section -->
-        <div class="final-phrase">
-            Меня валиднули не раз, до сих пор я пидорас
+        <!-- Иконка стрелки -->
+        <span class="arrow-icon">⤢</span>
+
+        <!-- Нижние точки навигации -->
+        <div class="footer-dots" id="footer-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
         </div>
     </div>
+
+    <script>
+        // Получаем ссылки на элементы DOM
+        const cardContentArea = document.getElementById('card-content-area');
+        const dots = document.querySelectorAll('.dot');
+
+        // Определяем содержимое для каждой "страницы"
+        const pagesContent = [
+            // Содержимое первой страницы (с ценами)
+            `
+            <div class="flex-grow overflow-y-auto pt-16 pb-16">
+                <p class="price-text">Price of Poison Team</p>
+
+                <!-- Раздел "Расследования" -->
+                <h3 class="section-title mt-8">Расследования:</h3>
+                <ul>
+                    <li class="list-item">Информационное досье – 2.99usdt</li>
+                    <li class="list-item">Оперативное досье – 3.99usdt</li>
+                    <li class="list-item">Разведывательное досье – 5.99usdt</li>
+                </ul>
+
+                <!-- Раздел "Обучение" -->
+                <h3 class="section-title">Обучение:</h3>
+                <ul>
+                    <li class="list-item">Наставничество – 6.99usdt/6 мес</li>
+                    <li class="list-item">Мануал OSINT – 4.99usdt</li>
+                    <li class="list-item">Личный Архив – 2.99usdt/мес | 5.99usdt/навсегда</li>
+                </ul>
+
+                <!-- Раздел "Физические номера Telegram" -->
+                <h3 class="section-title">Физические номера Telegram:</h3>
+                <ul>
+                    <li class="list-item">+420 – 4.99usdt</li>
+                    <li class="list-item">+55 – 2.99usdt</li>
+                    <li class="list-item">+44 – 2.99usdt</li>
+                    <li class="list-item">+33 – 2.99usdt</li>
+                </ul>
+
+                <!-- Раздел "Физические номера Вконтакте" -->
+                <h3 class="section-title">Физические номера Вконтакте:</h3>
+                <ul>
+                    <li class="list-item">+7 (рф/кз) – 3.99usdt</li>
+                    <li class="list-item">Случайный – 2.99usdt</li>
+                </ul>
+            </div>
+            `,
+            // Содержимое второй страницы (подробное описание)
+            `
+            <div class="flex-grow overflow-y-auto pt-16 pb-16">
+                <p class="price-text">Price of Poison Team</p>
+
+                <!-- Раздел "Подробнее" -->
+                <h3 class="section-title mt-8">Подробнее:</h3>
+                <ul>
+                    <li class="list-item">Информационное досье – сбор информации</li>
+                    <li class="list-item">Оперативное досье – сбор + анализ информации</li>
+                    <li class="list-item">Разведывательное досье – сбор + анализ + разведка</li>
+                </ul>
+
+                <!-- Раздел "Наставничество" -->
+                <h3 class="section-title">Наставничество:</h3>
+                <ul>
+                    <li class="list-item">вместе с командой проведем тебя по пути OSINT, GEOINT, SOCMINT и HUMINT.</li>
+                </ul>
+
+                <!-- Раздел "Мануал OSINT" -->
+                <h3 class="section-title">Мануал OSINT:</h3>
+                <ul>
+                    <li class="list-item">мануал по OSINT с искусственным интеллектом для помощи и ответов на вопросы. Мануал содержит 17 разделов, обучающих, и ознакомляющих со сферой OSINT.</li>
+                </ul>
+
+                <!-- Раздел "Личный архив" -->
+                <h3 class="section-title">Личный архив:</h3>
+                <ul>
+                    <li class="list-item">обмен опытом, информацией, базами данных и мануалами с участниками команды Poison Team.</li>
+                </ul>
+
+                <!-- Общая заметка -->
+                <h3 class="section-title">Примечание:</h3>
+                <ul>
+                    <li class="list-item">Повторные коды на номера не возможны.</li>
+                </ul>
+            </div>
+            `
+        ];
+
+        let currentPageIndex = 0; // Текущая активная страница (0 - первая страница, с ценами)
+
+        // Функция для обновления содержимого и активной точки
+        function updatePageContent(index) {
+            // Убедимся, что индекс находится в пределах допустимых значений
+            if (index >= 0 && index < pagesContent.length) {
+                cardContentArea.innerHTML = pagesContent[index]; // Вставляем HTML-содержимое
+                
+                // Обновляем активную точку
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                currentPageIndex = index;
+            }
+        }
+
+        // Добавляем обработчик событий для кликов по области контента
+        cardContentArea.addEventListener('click', (event) => {
+            const cardRect = cardContentArea.getBoundingClientRect();
+            const clickX = event.clientX - cardRect.left; // X-координата относительно области контента
+
+            if (clickX < cardRect.width / 2) {
+                // Клик по левой половине
+                if (currentPageIndex > 0) {
+                    updatePageContent(currentPageIndex - 1);
+                }
+            } else {
+                // Клик по правой половине
+                if (currentPageIndex < pagesContent.length - 1) {
+                    updatePageContent(currentPageIndex + 1);
+                }
+            }
+        });
+
+        // Инициализируем содержимое первой страницы при загрузке
+        window.onload = function() {
+            updatePageContent(0);
+        };
+    </script>
 </body>
 </html>
 
