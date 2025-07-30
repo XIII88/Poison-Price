@@ -193,7 +193,6 @@
             // Содержимое первой страницы (с ценами)
             `
             <div class="flex-grow overflow-y-auto pt-16 pb-16">
-                <p class="price-text">Price of Poison Team</p>
 
                 <!-- Раздел "Расследования" -->
                 <h3 class="section-title mt-8">Расследования:</h3>
@@ -231,7 +230,6 @@
             // Содержимое второй страницы (подробное описание)
             `
             <div class="flex-grow overflow-y-auto pt-16 pb-16">
-                <p class="price-text">Price of Poison Team</p>
 
                 <!-- Раздел "Подробнее" -->
                 <h3 class="section-title mt-8">Подробнее:</h3>
@@ -268,15 +266,12 @@
             `
         ];
 
-        let currentPageIndex = 0; // Текущая активная страница (0 - первая страница, с ценами)
+        let currentPageIndex = 0;
 
-        // Функция для обновления содержимого и активной точки
         function updatePageContent(index) {
-            // Убедимся, что индекс находится в пределах допустимых значений
             if (index >= 0 && index < pagesContent.length) {
-                cardContentArea.innerHTML = pagesContent[index]; // Вставляем HTML-содержимое
+                cardContentArea.innerHTML = pagesContent[index];
                 
-                // Обновляем активную точку
                 dots.forEach((dot, i) => {
                     if (i === index) {
                         dot.classList.add('active');
@@ -288,7 +283,6 @@
             }
         }
 
-        // Добавляем обработчик событий для кликов по области контента
         cardContentArea.addEventListener('click', (event) => {
             const cardRect = cardContentArea.getBoundingClientRect();
             const clickX = event.clientX - cardRect.left; // X-координата относительно области контента
@@ -306,7 +300,6 @@
             }
         });
 
-        // Инициализируем содержимое первой страницы при загрузке
         window.onload = function() {
             updatePageContent(0);
         };
